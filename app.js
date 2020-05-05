@@ -47,6 +47,7 @@ app.post("/" , function(req, res)
     },
     body: jsonData
   }
+
   request(options, function(error, response, body)
 {
   if(error)
@@ -72,21 +73,4 @@ app.post("/" , function(req, res)
 app.listen(process.env.PORT || 3000 , function()
 {
   console.log("Server is runninig on port 3000");
-});
-
-app.post("/b" , function(req, res)
-{
-  var crypto = req.body.crypto;
-  var cur = req.body.cur;
-  console.log(crypto + cur);
-
-  var url = "https://apiv2.bitcoinaverage.com/indices/global/ticker/" + crypto + cur;
-
-  request(url, function(error, response, body)
-  {
-    var data = JSON.parse(body);
-    var price = data.last;
-
-    res.send("<h1>The current price of" + crypto + "is " + price + " " + cur + "</h1>" );
-  });
 });
